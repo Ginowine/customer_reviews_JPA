@@ -1,5 +1,6 @@
 package com.udacity.course3.reviews;
 
+import org.flywaydb.core.Flyway;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +9,9 @@ public class ReviewsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReviewsApplication.class, args);
+
+		Flyway flyway = Flyway.configure().dataSource("jdbc:mysql://localhost:3306/review_DB", "ginowine", "developer").load();
+		flyway.migrate();
 	}
 
 }
