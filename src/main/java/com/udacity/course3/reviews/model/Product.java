@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Products {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +16,11 @@ public class Products {
     @Column(nullable = false, unique = true)
     private Double productAmount;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "products")
-    private List<Reviews> reviews;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "product")
+    private List<Review> reviews;
+
+    public Product() {
+    }
 
     public long getId() {
         return id;
@@ -43,11 +46,11 @@ public class Products {
         this.productAmount = productAmount;
     }
 
-    public List<Reviews> getReviews() {
+    public List<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Reviews> reviews) {
+    public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
 }

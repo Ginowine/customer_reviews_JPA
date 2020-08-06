@@ -2,6 +2,9 @@ CREATE TABLE comments (
                           ID int(20) NOT NULL AUTO_INCREMENT,
                           Text varchar(200) NOT NULL ,
                           CreatedTime datetime DEFAULT CURRENT_TIMESTAMP,
+                          Review_ID varchar(20) NOT NULL ,
+                          CONSTRAINT fk_review
+                          FOREIGN KEY (Review_ID) REFERENCES reviews(ID) ON DELETE CASCADE ,
                           PRIMARY KEY (ID)
 );
 
@@ -15,9 +18,6 @@ CREATE TABLE reviews(
                         Product_ID varchar(20) NOT NULL ,
                         CONSTRAINT fk_product
                         FOREIGN KEY (Product_ID) REFERENCES products(ID) ON DELETE CASCADE ,
-
-                        CONSTRAINT fk_comment
-                        FOREIGN KEY (Comment_ID) REFERENCES comments(ID) ON DELETE CASCADE,
                         PRIMARY KEY (ID)
 );
 

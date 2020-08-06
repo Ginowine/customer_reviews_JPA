@@ -1,9 +1,10 @@
 package com.udacity.course3.reviews.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-public class Reviews {
+public class Review {
 
     @Id
     @GeneratedValue
@@ -11,15 +12,10 @@ public class Reviews {
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "product_id")
-    private Products products;
+    private Product product;
 
-    public Products getProducts() {
-        return products;
-    }
-
-    public void setProducts(Products products) {
-        this.products = products;
-    }
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "review")
+    private List<Comment> comments;
 
     @Column(nullable = false)
     private String reviewerName;
@@ -38,6 +34,25 @@ public class Reviews {
 
     @Column(nullable = false)
     private long productId;
+
+    public Review() {
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public long getId() {
         return id;
