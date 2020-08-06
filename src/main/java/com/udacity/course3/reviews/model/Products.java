@@ -1,7 +1,9 @@
 package com.udacity.course3.reviews.model;
 
 import javax.persistence.*;
+import java.util.List;
 
+@Entity
 public class Products {
 
     @Id

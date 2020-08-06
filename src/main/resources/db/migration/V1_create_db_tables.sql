@@ -11,13 +11,13 @@ CREATE TABLE reviews(
                         ReviewDescription text(200) NOT NULL ,
                         ReviewTitle varchar(20) NOT NULL ,
                         CreatedTime datetime DEFAULT current_timestamp,
-                        Comments_ID int(20) NOT NULL,
+                        Comment_ID int(20) NOT NULL,
                         Product_ID varchar(20) NOT NULL ,
                         CONSTRAINT fk_product
                         FOREIGN KEY (Product_ID) REFERENCES products(ID) ON DELETE CASCADE ,
 
                         CONSTRAINT fk_comment
-                        FOREIGN KEY (Comments_ID) REFERENCES comments(ID) ON DELETE CASCADE,
+                        FOREIGN KEY (Comment_ID) REFERENCES comments(ID) ON DELETE CASCADE,
                         PRIMARY KEY (ID)
 );
 
