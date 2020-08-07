@@ -26,6 +26,13 @@ public class Comment {
     public Comment() {
     }
 
+    public Comment(Review review, String commentTest, String reviewId, String createdTime) {
+        this.review = review;
+        this.commentTest = commentTest;
+        this.reviewId = reviewId;
+        this.createdTime = createdTime;
+    }
+
     public long getID() {
         return ID;
     }

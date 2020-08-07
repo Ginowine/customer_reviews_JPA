@@ -22,6 +22,12 @@ public class Product {
     public Product() {
     }
 
+    public Product(String productName, Double productAmount, List<Review> reviews) {
+        this.productName = productName;
+        this.productAmount = productAmount;
+        this.reviews = reviews;
+    }
+
     public long getId() {
         return id;
     }

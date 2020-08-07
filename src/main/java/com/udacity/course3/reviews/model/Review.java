@@ -38,6 +38,17 @@ public class Review {
     public Review() {
     }
 
+    public Review(Product product, List<Comment> comments, String reviewerName, String reviewerDescription, String reviewerTitle, String createdTime, long commentId, long productId) {
+        this.product = product;
+        this.comments = comments;
+        this.reviewerName = reviewerName;
+        this.reviewerDescription = reviewerDescription;
+        this.reviewerTitle = reviewerTitle;
+        this.createdTime = createdTime;
+        this.commentId = commentId;
+        this.productId = productId;
+    }
+
     public List<Comment> getComments() {
         return comments;
     }
