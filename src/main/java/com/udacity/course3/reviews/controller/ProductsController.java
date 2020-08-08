@@ -3,7 +3,6 @@ package com.udacity.course3.reviews.controller;
 import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.repository.ProductRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
@@ -39,8 +38,7 @@ public class ProductsController {
      * @return The product if found, or a 404 not found.
      */
     @RequestMapping(value = "/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
-        productRepository.findById(id);
+    public Product findById(@PathVariable("id") Integer id) {
         throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
     }
 
