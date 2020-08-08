@@ -26,7 +26,7 @@ public class ProductsController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct(Product product) {
+    public void createProduct(@RequestBody Product product) {
         productRepository.save(product);
         throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
     }
@@ -39,7 +39,12 @@ public class ProductsController {
      */
     @RequestMapping(value = "/{id}")
     public Product findById(@PathVariable("id") Integer id) {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+        Product product = productRepository.findById(id);
+        if (product != null){
+            return product;
+        }else {
+            throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+        }
     }
 
     /**
