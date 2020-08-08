@@ -1,5 +1,7 @@
 package com.udacity.course3.reviews.controller;
 
+import com.udacity.course3.reviews.model.Product;
+import com.udacity.course3.reviews.repository.ProductRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.List;
 public class ProductsController {
 
     // TODO: Wire JPA repositories here
+    private ProductRepository productRepository;
 
     /**
      * Creates a product.
@@ -24,7 +27,8 @@ public class ProductsController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct() {
+    public void createProduct(Product product) {
+        productRepository.save(product);
         throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -36,6 +40,7 @@ public class ProductsController {
      */
     @RequestMapping(value = "/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
+        productRepository.findById(id);
         throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -46,6 +51,7 @@ public class ProductsController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<?> listProducts() {
+        List<Product> products = (List<Product>) productRepository.findAll();
         throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
     }
 }
