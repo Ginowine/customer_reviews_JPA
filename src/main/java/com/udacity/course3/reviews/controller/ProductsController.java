@@ -1,7 +1,9 @@
 package com.udacity.course3.reviews.controller;
 
+import com.udacity.course3.reviews.exception.ProductNotFoundException;
 import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
@@ -16,6 +18,7 @@ import java.util.List;
 public class ProductsController {
 
     // TODO: Wire JPA repositories here
+    @Autowired
     private ProductRepository productRepository;
 
     /**
@@ -38,14 +41,15 @@ public class ProductsController {
      * @return The product if found, or a 404 not found.
      */
     @RequestMapping(value = "/{id}")
-    public Product findById(@PathVariable("id") Integer id) {
+    public Product findById(@PathVariable("id") Long id) throws ProductNotFoundException {
+        Product product = productRepository.findProductById(id);
 
-        Product product = productRepository.findById(id);
-        if (product != null){
-            return product;
-        }else {
-            throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+        if (product == null){
+            throw new ProductNotFoundException("Error 404: PRODUCT_NOT_FOUND");
         }
+
+        return product;
+
     }
 
     /**
