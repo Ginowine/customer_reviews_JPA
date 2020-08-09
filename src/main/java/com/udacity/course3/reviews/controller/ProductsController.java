@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,11 +60,15 @@ public class ProductsController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Product> listProducts() {
-        List<Product> products = productRepository.findAll();
-        if (products != null){
-            return products;
-        }else {
-            throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+
+        Iterable<Product> productIterable = productRepository.findAll();
+
+        List<Product> productList = new ArrayList<Product>();
+
+        for (Product prod : productIterable){
+            productList.add(prod);
         }
+
+        return productList;
     }
 }
