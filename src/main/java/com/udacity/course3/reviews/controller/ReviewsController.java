@@ -3,15 +3,11 @@ package com.udacity.course3.reviews.controller;
 import com.udacity.course3.reviews.exception.ProductNotFoundException;
 import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.model.Review;
-import com.udacity.course3.reviews.repository.ProductRepository;
 import com.udacity.course3.reviews.repository.ReviewRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Spring REST controller for working with review entity.
@@ -20,8 +16,10 @@ import java.util.Optional;
 public class ReviewsController {
 
     // TODO: Wire JPA repositories here
+    @Autowired
     private ReviewRepository reviewRepository;
-    private ProductRepository productRepository;
+
+    private Review review1;
 
     /**
      * Creates a review for a product.
@@ -35,23 +33,13 @@ public class ReviewsController {
      * @return The created review or 404 if product id is not found.
      */
     @RequestMapping(value = "/reviews/products/{productId}", method = RequestMethod.POST)
-    public ResponseEntity<Review> createReviewForProduct(@RequestBody Review review,
-                                                         @PathVariable("productId") Integer productId) throws ProductNotFoundException {
+    public Review createReviewForProduct(@RequestBody Review review,
+                                                         @PathVariable("productId") Long productId) throws ProductNotFoundException {
         Product productExisting = reviewRepository.findByProductId(productId);
         if (productExisting == null){
             throw new ProductNotFoundException("NOT_FOUND");
         }
-
-        productExisting.setId(productId);
-        List<Review> reviews = productExisting.getReviews();
-
-        for (Review review1 : reviews){
-            review1.setId();
-            review1.setProduct(productExisting);
-        }
-
-        return reviewRepository.save(productExisting);
-
+        return reviewRepository.save(review);
     }
 
     /**
@@ -61,14 +49,8 @@ public class ReviewsController {
      * @return The list of reviews.
      */
     @RequestMapping(value = "/reviews/products/{productId}", method = RequestMethod.GET)
-    public ResponseEntity<List<?>> listReviewsForProduct(@PathVariable("productId") Integer productId) {
-        Product product = reviewRepository.findByProductId(productId);
-        List<Review> reviews;
+    public List<Review> listReviewsForProduct(@PathVariable("productId") Long productId) {
+        return reviewRepository.findReviewsByProductId(productId);
 
-        if (product != null){
-            reviews = reviewRepository.findAll();
-        }
-
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
     }
 }
