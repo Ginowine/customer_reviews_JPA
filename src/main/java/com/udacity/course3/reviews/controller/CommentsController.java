@@ -5,9 +5,7 @@ import com.udacity.course3.reviews.model.Comment;
 import com.udacity.course3.reviews.model.Review;
 import com.udacity.course3.reviews.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 
@@ -22,6 +20,8 @@ public class CommentsController {
     @Autowired
    private CommentRepository commentRepository;
 
+    private Review existingReview;
+
     /**
      * Creates a comment for a review.
      *
@@ -34,11 +34,10 @@ public class CommentsController {
      */
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.POST)
     public Comment createCommentForReview(@RequestBody Comment comment, @PathVariable("reviewId") Long reviewId) throws ReviewNotFound {
-        Review existingReview = commentRepository.findByReviewId(reviewId);
+        existingReview = commentRepository.findByReviewId(reviewId);
         if (existingReview == null){
             throw new ReviewNotFound("ERROR: REVIEW_NOT_FOUND");
         }
-
         return commentRepository.save(comment);
     }
 
@@ -52,7 +51,12 @@ public class CommentsController {
      * @param reviewId The id of the review.
      */
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.GET)
-    public List<?> listCommentsForReview(@PathVariable("reviewId") Integer reviewId) {
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public List<?> listCommentsForReview(@PathVariable("reviewId") Long reviewId) throws ReviewNotFound {
+        existingReview = commentRepository.findByReviewId(reviewId);
+        if (existingReview == null){
+            throw new ReviewNotFound("ERROR: REVIEW_NOT_FOUND");
+        }
+
+        return commentRepository.findCommentsByReviewId(reviewId);
     }
 }
