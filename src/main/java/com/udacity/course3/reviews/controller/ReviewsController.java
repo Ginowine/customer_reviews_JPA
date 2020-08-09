@@ -37,7 +37,7 @@ public class ReviewsController {
                                                          @PathVariable("productId") Long productId) throws ProductNotFoundException {
         Product productExisting = reviewRepository.findByProductId(productId);
         if (productExisting == null){
-            throw new ProductNotFoundException("NOT_FOUND");
+            throw new ProductNotFoundException("ERROR: PRODUCT_NOT_FOUND");
         }
         return reviewRepository.save(review);
     }

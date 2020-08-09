@@ -60,9 +60,7 @@ public class ProductsController {
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Product> listProducts() {
-
         Iterable<Product> productIterable = productRepository.findAll();
-
         List<Product> productList = new ArrayList<Product>();
 
         for (Product prod : productIterable){
