@@ -39,6 +39,7 @@ public class ProductsController {
      */
     @RequestMapping(value = "/{id}")
     public Product findById(@PathVariable("id") Integer id) {
+
         Product product = productRepository.findById(id);
         if (product != null){
             return product;
@@ -53,8 +54,12 @@ public class ProductsController {
      * @return The list of products.
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<?> listProducts() {
-        List<Product> products = (List<Product>) productRepository.findAll();
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public List<Product> listProducts() {
+        List<Product> products = productRepository.findAll();
+        if (products != null){
+            return products;
+        }else {
+            throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+        }
     }
 }
