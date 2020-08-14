@@ -8,6 +8,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
     private long id;
 
     @Column(nullable = false, unique = true)
@@ -16,16 +17,21 @@ public class Product {
     @Column(nullable = false, unique = true)
     private Double productAmount;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "productReview")
     private List<Review> reviews;
 
     public Product() {
     }
 
-    public Product(String productName, Double productAmount, List<Review> reviews) {
+    public Product(String productName, Double productAmount) {
         this.productName = productName;
         this.productAmount = productAmount;
-        this.reviews = reviews;
+    }
+
+    public Product(Long id, String productName, Double productAmount) {
+        this.productName = productName;
+        this.productAmount = productAmount;
+        this.id = id;
     }
 
     public long getId() {

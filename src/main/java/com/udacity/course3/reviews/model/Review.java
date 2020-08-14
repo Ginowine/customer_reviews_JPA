@@ -7,10 +7,11 @@ import java.util.List;
 public class Review {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "review_id")
     private long id;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -29,24 +30,23 @@ public class Review {
     @Column(nullable = false)
     private String createdTime;
 
-    @Column(nullable = false)
-    private long commentId;
-
-    @Column(nullable = false)
-    private long productId;
 
     public Review() {
     }
 
-    public Review(Product product, List<Comment> comments, String reviewerName, String reviewerDescription, String reviewerTitle, String createdTime, long commentId, long productId) {
-        this.product = product;
-        this.comments = comments;
+    public Review(String reviewerName, String reviewerDescription, String reviewerTitle, String createdTime) {
         this.reviewerName = reviewerName;
         this.reviewerDescription = reviewerDescription;
         this.reviewerTitle = reviewerTitle;
         this.createdTime = createdTime;
-        this.commentId = commentId;
-        this.productId = productId;
+    }
+
+    public Review(Long id, String reviewerName, String reviewerDescription, String reviewerTitle, String createdTime) {
+        this.reviewerName = reviewerName;
+        this.reviewerDescription = reviewerDescription;
+        this.reviewerTitle = reviewerTitle;
+        this.createdTime = createdTime;
+        this.id = id;
     }
 
     public List<Comment> getComments() {
@@ -103,21 +103,5 @@ public class Review {
 
     public void setCreatedTime(String createdTime) {
         this.createdTime = createdTime;
-    }
-
-    public long getCommentId() {
-        return commentId;
-    }
-
-    public void setCommentId(long commentId) {
-        this.commentId = commentId;
-    }
-
-    public long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(long productId) {
-        this.productId = productId;
     }
 }

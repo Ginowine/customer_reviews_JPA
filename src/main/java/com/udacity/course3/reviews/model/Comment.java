@@ -7,7 +7,8 @@ public class Comment {
 
     @Id
     @GeneratedValue
-    private long ID;
+    @Column(name = "comment_id")
+    private long id;
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "review_id")
@@ -17,28 +18,29 @@ public class Comment {
     private String commentTest;
 
     @Column(nullable = false)
-    private String reviewId;
-
-    @Column(nullable = false)
     private String createdTime;
 
 
     public Comment() {
     }
 
-    public Comment(Review review, String commentTest, String reviewId, String createdTime) {
-        this.review = review;
+    public Comment(String commentTest, String createdTime) {
         this.commentTest = commentTest;
-        this.reviewId = reviewId;
         this.createdTime = createdTime;
     }
 
-    public long getID() {
-        return ID;
+    public Comment(Long id, String commentTest, String createdTime) {
+        this.commentTest = commentTest;
+        this.createdTime = createdTime;
+        this.id = id;
     }
 
-    public void setID(long ID) {
-        this.ID = ID;
+    public long getID() {
+        return id;
+    }
+
+    public void setID(long id) {
+        this.id = id;
     }
 
     public Review getReview() {
@@ -57,13 +59,13 @@ public class Comment {
         this.commentTest = commentTest;
     }
 
-    public String getReviewId() {
-        return reviewId;
-    }
-
-    public void setReviewId(String reviewId) {
-        this.reviewId = reviewId;
-    }
+//    public String getReviewId() {
+//        return review_Id;
+//    }
+//
+//    public void setReviewId(String reviewId) {
+//        this.review_Id = reviewId;
+//    }
 
     public String getCreatedTime() {
         return createdTime;
