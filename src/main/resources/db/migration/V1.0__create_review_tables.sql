@@ -11,10 +11,10 @@ CREATE TABLE review(
                        review_description varchar(200) NOT NULL ,
                        review_title varchar(20) NOT NULL ,
                        created_time varchar(20) not null ,
-                       product_id long(20) NOT NULL ,
+                       product_id long(20),
                        PRIMARY KEY (review_id),
                        CONSTRAINT fk_product
-                           FOREIGN KEY (product_id) REFERENCES product(product_id)
+                       FOREIGN KEY (product_id) REFERENCES product(product_id)
 
 );
 

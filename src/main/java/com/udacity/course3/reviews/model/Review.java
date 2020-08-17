@@ -30,23 +30,28 @@ public class Review {
     @Column(nullable = false, name = "created_time")
     private String CreatedTime;
 
+    @Column(nullable = false, name = "product_id", insertable = false, updatable = false)
+    private long product_id;
+
 
     public Review() {
     }
 
-    public Review(String reviewerName, String reviewerDescription, String reviewerTitle, String createdTime) {
+    public Review(String reviewerName, String reviewerDescription, String reviewerTitle, String createdTime, long product_Id) {
         this.reviewerName = reviewerName;
         this.reviewerDescription = reviewerDescription;
         this.reviewerTitle = reviewerTitle;
         this.CreatedTime = createdTime;
+        this.product_id = product_Id;
     }
 
-    public Review(Long id, String reviewerName, String reviewerDescription, String reviewerTitle, String createdTime) {
+    public Review(Long id, String reviewerName, String reviewerDescription, String reviewerTitle, String createdTime, long product_Id) {
+        this.id = id;
         this.reviewerName = reviewerName;
         this.reviewerDescription = reviewerDescription;
         this.reviewerTitle = reviewerTitle;
         this.CreatedTime = createdTime;
-        this.id = id;
+        this.product_id = product_Id;
     }
 
     public List<Comment> getComments() {
@@ -103,5 +108,13 @@ public class Review {
 
     public void setCreatedTime(String createdTime) {
         this.CreatedTime = createdTime;
+    }
+
+    public long getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(long product_id) {
+        this.product_id = product_id;
     }
 }
