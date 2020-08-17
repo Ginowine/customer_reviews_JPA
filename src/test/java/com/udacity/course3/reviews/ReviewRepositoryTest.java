@@ -41,8 +41,6 @@ public class ReviewRepositoryTest {
 
         reviewRepository.save(review);
 
-        //review.setProduct(product);
-
 //        Product actualProduct = reviewRepository.findByProductId(product.getId());
 //
 //        assertThat(actualProduct).isNotNull();
