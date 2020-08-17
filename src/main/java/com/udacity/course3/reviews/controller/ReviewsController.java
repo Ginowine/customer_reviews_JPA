@@ -3,6 +3,7 @@ package com.udacity.course3.reviews.controller;
 import com.udacity.course3.reviews.exception.ProductNotFoundException;
 import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.model.Review;
+import com.udacity.course3.reviews.repository.ProductRepository;
 import com.udacity.course3.reviews.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,8 @@ public class ReviewsController {
     // TODO: Wire JPA repositories here
     @Autowired
     private ReviewRepository reviewRepository;
+    @Autowired
+    ProductRepository productRepository;
 
     private Review review1;
 
@@ -35,7 +38,8 @@ public class ReviewsController {
     @RequestMapping(value = "/reviews/products/{productId}", method = RequestMethod.POST)
     public Review createReviewForProduct(@RequestBody Review review,
                                                          @PathVariable("productId") Long productId) throws ProductNotFoundException {
-        Product productExisting = reviewRepository.findByProductId(productId);
+        //Product productExisting = reviewRepository.findByProductId(productId);
+        Product productExisting = productRepository.findProductById(productId);
         if (productExisting == null){
             throw new ProductNotFoundException("ERROR: PRODUCT_NOT_FOUND");
         }
