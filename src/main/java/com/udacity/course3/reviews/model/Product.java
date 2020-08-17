@@ -9,28 +9,28 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private long id;
+    private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String productName;
+    @Column(nullable = false, unique = true, name = "product_name")
+    private String product_Name;
 
-    @Column(nullable = false, unique = true)
-    private Double productAmount;
+    @Column(nullable = false, name = "product_amt")
+    private double product_Amt;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "productReview")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "product")
     private List<Review> reviews;
 
     public Product() {
     }
 
-    public Product(String productName, Double productAmount) {
-        this.productName = productName;
-        this.productAmount = productAmount;
+    public Product(String productName, double productAmount) {
+        this.product_Name = productName;
+        this.product_Amt = productAmount;
     }
 
-    public Product(Long id, String productName, Double productAmount) {
-        this.productName = productName;
-        this.productAmount = productAmount;
+    public Product(Long id, String productName, double productAmount) {
+        this.product_Name = productName;
+       this.product_Amt = productAmount;
         this.id = id;
     }
 
@@ -38,24 +38,24 @@ public class Product {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getProduct_Name() {
+        return product_Name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setProduct_Name(String product_Name) {
+        this.product_Name = product_Name;
     }
 
-    public Double getProductAmount() {
-        return productAmount;
+    public double getProduct_Amt() {
+        return product_Amt;
     }
 
-    public void setProductAmount(Double productAmount) {
-        this.productAmount = productAmount;
+    public void setProduct_Amt(double product_Amt) {
+        this.product_Amt = product_Amt;
     }
 
     public List<Review> getReviews() {

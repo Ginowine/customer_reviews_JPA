@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Comment {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
     private long id;
 
@@ -14,24 +14,23 @@ public class Comment {
     @JoinColumn(name = "review_id")
     private Review review;
 
-    @Column(nullable = false)
-    private String commentTest;
+    @Column(nullable = false, name = "test")
+    private String test;
 
-    @Column(nullable = false)
-    private String createdTime;
-
+    @Column(nullable = false, name = "created_time")
+    private String createdtime;
 
     public Comment() {
     }
 
     public Comment(String commentTest, String createdTime) {
-        this.commentTest = commentTest;
-        this.createdTime = createdTime;
+        this.test = commentTest;
+        this.createdtime = createdTime;
     }
 
     public Comment(Long id, String commentTest, String createdTime) {
-        this.commentTest = commentTest;
-        this.createdTime = createdTime;
+        this.test = commentTest;
+        this.createdtime = createdTime;
         this.id = id;
     }
 
@@ -51,27 +50,19 @@ public class Comment {
         this.review = review;
     }
 
-    public String getCommentTest() {
-        return commentTest;
+    public String getTest() {
+        return test;
     }
 
-    public void setCommentTest(String commentTest) {
-        this.commentTest = commentTest;
+    public void setTest(String test) {
+        this.test = test;
     }
 
-//    public String getReviewId() {
-//        return review_Id;
-//    }
-//
-//    public void setReviewId(String reviewId) {
-//        this.review_Id = reviewId;
-//    }
-
-    public String getCreatedTime() {
-        return createdTime;
+    public String getCreatedtime() {
+        return createdtime;
     }
 
-    public void setCreatedTime(String createdTime) {
-        this.createdTime = createdTime;
+    public void setCreatedtime(String createdtime) {
+        this.createdtime = createdtime;
     }
 }

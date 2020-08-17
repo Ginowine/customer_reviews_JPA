@@ -18,17 +18,17 @@ public class Review {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "review")
     private List<Comment> comments;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "reviewer_name")
     private String reviewerName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "review_description")
     private String reviewerDescription;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "review_title")
     private String reviewerTitle;
 
-    @Column(nullable = false)
-    private String createdTime;
+    @Column(nullable = false, name = "created_time")
+    private String CreatedTime;
 
 
     public Review() {
@@ -38,14 +38,14 @@ public class Review {
         this.reviewerName = reviewerName;
         this.reviewerDescription = reviewerDescription;
         this.reviewerTitle = reviewerTitle;
-        this.createdTime = createdTime;
+        this.CreatedTime = createdTime;
     }
 
     public Review(Long id, String reviewerName, String reviewerDescription, String reviewerTitle, String createdTime) {
         this.reviewerName = reviewerName;
         this.reviewerDescription = reviewerDescription;
         this.reviewerTitle = reviewerTitle;
-        this.createdTime = createdTime;
+        this.CreatedTime = createdTime;
         this.id = id;
     }
 
@@ -98,10 +98,10 @@ public class Review {
     }
 
     public String getCreatedTime() {
-        return createdTime;
+        return CreatedTime;
     }
 
     public void setCreatedTime(String createdTime) {
-        this.createdTime = createdTime;
+        this.CreatedTime = createdTime;
     }
 }

@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
+import static junit.framework.TestCase.assertEquals;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -31,18 +31,17 @@ public class ProductRepositoryTest {
     public void testFindProductById(){
         Product product = new Product();
 
-//        Review reviews = new Review();
-//        reviews.se
+        product.setId(1L);
+        product.setProduct_Name("Gucci Bag");
+        product.setProduct_Amt(400.00);
 
-        product.setId(1);
-        product.setProductAmount(400.00);
-        product.setProductName("Gucci Bag");
-
-
-        entityManager.persist(product);
+        //entityManager.merge(product);
+        productRepository.save(product);
 
         Product actualProduct = productRepository.findProductById(product.getId());
         assertThat(actualProduct).isNotNull();
         assertEquals(product.getId(), actualProduct.getId());
+        assertEquals(product.getProduct_Name(), actualProduct.getProduct_Name());
+        assertEquals(product.getProduct_Amt(), actualProduct.getProduct_Amt());
     }
 }
