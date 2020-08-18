@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static junit.framework.TestCase.assertEquals;
@@ -14,12 +15,14 @@ import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ProductRepositoryTest {
 
     @Autowired private ProductRepository productRepository;
 
     @Test
     public void testFindProductById(){
+
         Product product = new Product();
         product.setId(1L);
         product.setProduct_Name("Gucci Bag");
@@ -53,5 +56,6 @@ public class ProductRepositoryTest {
 
         productRepository.save(product);
         assertNotNull(productRepository.findAll());
+
     }
 }
