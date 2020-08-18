@@ -20,18 +20,31 @@ public class Comment {
     @Column(nullable = false, name = "created_time")
     private String createdtime;
 
+    @Column(name = "review_id", insertable = false, updatable = false)
+    private long review_id;
+
     public Comment() {
     }
 
-    public Comment(String commentTest, String createdTime) {
+    public Comment(String commentTest, String createdTime, long review_id) {
         this.test = commentTest;
         this.createdtime = createdTime;
+        this.review_id = review_id;
     }
 
-    public Comment(Long id, String commentTest, String createdTime) {
+    public Comment(Long id, String commentTest, String createdTime, long review_id) {
+        this.id = id;
         this.test = commentTest;
         this.createdtime = createdTime;
-        this.id = id;
+        this.review_id = review_id;
+    }
+
+    public long getReview_id() {
+        return review_id;
+    }
+
+    public void setReview_id(long review_id) {
+        this.review_id = review_id;
     }
 
     public long getID() {

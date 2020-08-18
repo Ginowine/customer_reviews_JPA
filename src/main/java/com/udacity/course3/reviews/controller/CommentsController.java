@@ -56,7 +56,6 @@ public class CommentsController {
         if (existingReview == null){
             throw new ReviewNotFound("ERROR: REVIEW_NOT_FOUND");
         }
-
         return commentRepository.findCommentsByReviewId(reviewId);
     }
 }

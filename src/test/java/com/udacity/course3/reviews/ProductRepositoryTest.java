@@ -55,6 +55,5 @@ public class ProductRepositoryTest {
 
         productRepository.save(product);
         assertNotNull(productRepository.findAll());
-
     }
 }
