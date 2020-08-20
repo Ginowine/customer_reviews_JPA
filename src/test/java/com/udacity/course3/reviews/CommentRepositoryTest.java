@@ -38,7 +38,6 @@ public class CommentRepositoryTest {
         Product product1 = productRepository.findProductById(product.getId());
 
         Review review = new Review();
-
         review.setId(2L);
         review.setReviewerTitle("hgdkd jhjh");
         review.setReviewerName("Gino");
@@ -47,6 +46,9 @@ public class CommentRepositoryTest {
         review.setProduct_id(product1.getId());
 
         Review review1 = reviewRepository.save(review);
+
+//        assertThat(review1).isNotNull();
+//        assertEquals(review.getId(), review1.getId());
 
         Comment comment = new Comment();
         comment.setID(1L);
@@ -57,8 +59,10 @@ public class CommentRepositoryTest {
         Comment comment1 = commentRepository.save(comment);
 
         assertThat(comment1).isNotNull();
+        assertThat(comment1.getReview_id()).isNotNull();
         assertEquals(comment.getID(), comment1.getID());
         assertEquals(comment.getTest(), comment1.getTest());
         assertEquals(comment.getCreatedtime(), comment1.getCreatedtime());
+        assertEquals(comment.getReview_id(), comment1.getReview_id());
     }
 }

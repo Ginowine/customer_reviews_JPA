@@ -22,7 +22,7 @@ CREATE TABLE comment (
                          comment_id long(20) NOT NULL AUTO_INCREMENT,
                          test varchar(500) NOT NULL ,
                          created_time varchar(20) not null ,
-                         review_id long(20) NOT NULL ,
+                         review_id long(20) ,
                          CONSTRAINT fk_review
                          FOREIGN KEY (review_id) REFERENCES review(review_id),
                          PRIMARY KEY (comment_id)

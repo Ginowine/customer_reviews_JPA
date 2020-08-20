@@ -10,7 +10,7 @@ public class Comment {
     @Column(name = "comment_id")
     private long id;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "review_id")
     private Review review;
 
@@ -20,7 +20,7 @@ public class Comment {
     @Column(nullable = false, name = "created_time")
     private String createdtime;
 
-    @Column(name = "review_id", insertable = false, updatable = false)
+    @Column(nullable = false, name = "review_id", insertable = false, updatable = false)
     private long review_id;
 
     public Comment() {
