@@ -13,6 +13,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static junit.framework.TestCase.assertEquals;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -64,5 +66,32 @@ public class CommentRepositoryTest {
         assertEquals(comment.getTest(), comment1.getTest());
         assertEquals(comment.getCreatedtime(), comment1.getCreatedtime());
         assertEquals(comment.getReview_id(), comment1.getReview_id());
+    }
+
+    @Test
+    public void findCommentByReviewId(){
+
+        Product product = new Product();
+        product.setId(1L);
+        product.setProduct_Name("Gucci Bag");
+        product.setProduct_Amt(400.00);
+
+        productRepository.save(product);
+        Product product1 = productRepository.findProductById(product.getId());
+
+        Review review = new Review();
+        review.setId(1L);
+        review.setReviewerTitle("hgdkd jhjh");
+        review.setReviewerName("Gino");
+        review.setReviewerDescription("jhgjg jhbgjudf jjh");
+        review.setCreatedTime("23:45");
+        review.setProduct_id(product1.getId());
+
+        Review review1 = reviewRepository.save(review);
+
+        List<Comment> comments = commentRepository.findCommentsByReviewId(review1.getId());
+
+        assertThat(comments).isNotNull();
+
     }
 }
