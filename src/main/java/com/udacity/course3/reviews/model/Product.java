@@ -11,7 +11,7 @@ public class Product {
     @Column(name = "product_id")
     private Long id;
 
-    @Column(nullable = false, unique = true, name = "product_name")
+    @Column(nullable = false, name = "product_name")
     private String product_Name;
 
     @Column(nullable = false, name = "product_amt")
@@ -29,12 +29,13 @@ public class Product {
     }
 
     public Product(Long id, String productName, double productAmount) {
-        this.product_Name = productName;
-       this.product_Amt = productAmount;
         this.id = id;
+        this.product_Name = productName;
+        this.product_Amt = productAmount;
+
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
