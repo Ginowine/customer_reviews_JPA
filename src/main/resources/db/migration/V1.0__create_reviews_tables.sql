@@ -2,7 +2,7 @@
 
 CREATE TABLE `product`(
     `product_id` INT PRIMARY KEY AUTO_INCREMENT,
-    `product_name` VARCHAR(200) NOT NULL,
+    `product_name` VARCHAR(200) ,
     `product_amt` DOUBLE NOT NULL);
 
 CREATE TABLE `review` (

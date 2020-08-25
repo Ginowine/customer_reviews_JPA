@@ -3,10 +3,12 @@ package com.udacity.course3.reviews.controller;
 import com.udacity.course3.reviews.exception.ProductNotFoundException;
 import com.udacity.course3.reviews.model.Product;
 import com.udacity.course3.reviews.repository.ProductRepository;
+import com.udacity.course3.reviews.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +18,15 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/products")
+@Transactional
 public class ProductsController {
 
     // TODO: Wire JPA repositories here
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     /**
      * Creates a product.
@@ -28,11 +34,19 @@ public class ProductsController {
      * 1. Accept product as argument. Use {@link RequestBody} annotation.
      * 2. Save product.
      */
-    @RequestMapping(value = "/products/newProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/createProduct", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct(@RequestBody Product product) {
-        productRepository.save(product);
-        throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        //return productRepository.save(product);
+        //throw new HttpServerErrorException(HttpStatus.NOT_IMPLEMENTED);
+        Product product1 = new Product();
+        product1.setProduct_Name(product.getProduct_Name());
+        product1.setProduct_Amt(product.getProduct_Amt());
+        product1.setReviews(product.getReviews());
+        productRepository.save(product1);
+
+        return ResponseEntity.ok(product1);
+
     }
 
     /**
@@ -42,7 +56,7 @@ public class ProductsController {
      * @return The product if found, or a 404 not found.
      */
     @RequestMapping(value = "/{id}")
-    public Product findById(@PathVariable("id") Long id) throws ProductNotFoundException {
+    public Product findById(@PathVariable("id") long id) throws ProductNotFoundException {
         Product product = productRepository.findProductById(id);
 
         if (product == null){

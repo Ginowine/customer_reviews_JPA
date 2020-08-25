@@ -9,9 +9,9 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Long id;
+    private long id;
 
-    @Column(nullable = false, name = "product_name")
+    @Column(name = "product_name")
     private String product_Name;
 
     @Column(nullable = false, name = "product_amt")
@@ -28,18 +28,24 @@ public class Product {
         this.product_Amt = productAmount;
     }
 
-    public Product(Long id, String productName, double productAmount) {
+    public Product(long id, String productName, double productAmount) {
         this.id = id;
         this.product_Name = productName;
         this.product_Amt = productAmount;
-
     }
 
-    public Long getId() {
+    public Product(long id, String productName, double productAmount, List<Review> reviews) {
+        this.id = id;
+        this.product_Name = productName;
+        this.product_Amt = productAmount;
+        this.reviews = reviews;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

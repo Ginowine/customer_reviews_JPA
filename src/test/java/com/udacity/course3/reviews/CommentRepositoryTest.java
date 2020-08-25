@@ -32,7 +32,7 @@ public class CommentRepositoryTest {
     @Test
     public void testFindCommentByReviewId(){
         Product product = new Product();
-        product.setId(1L);
+        product.setId(1);
         product.setProduct_Name("Gucci Bag");
         product.setProduct_Amt(400.00);
 
@@ -72,7 +72,7 @@ public class CommentRepositoryTest {
     public void findCommentByReviewId(){
 
         Product product = new Product();
-        product.setId(1L);
+        product.setId(1);
         product.setProduct_Name("Gucci Bag");
         product.setProduct_Amt(400.00);
 

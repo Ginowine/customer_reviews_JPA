@@ -33,7 +33,7 @@ public class CommentsController {
      * @param reviewId The id of the review.
      */
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.POST)
-    public Comment createCommentForReview(@RequestBody Comment comment, @PathVariable("reviewId") Long reviewId) throws ReviewNotFound {
+    public Comment createCommentForReview(@RequestBody Comment comment, @PathVariable("reviewId") int reviewId) throws ReviewNotFound {
         existingReview = commentRepository.findByReviewId(reviewId);
         if (existingReview == null){
             throw new ReviewNotFound("ERROR: REVIEW_NOT_FOUND");
@@ -51,7 +51,7 @@ public class CommentsController {
      * @param reviewId The id of the review.
      */
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.GET)
-    public List<Comment> listCommentsForReview(@PathVariable("reviewId") Long reviewId) throws ReviewNotFound {
+    public List<Comment> listCommentsForReview(@PathVariable("reviewId") int reviewId) throws ReviewNotFound {
         existingReview = commentRepository.findByReviewId(reviewId);
         if (existingReview == null){
             throw new ReviewNotFound("ERROR: REVIEW_NOT_FOUND");

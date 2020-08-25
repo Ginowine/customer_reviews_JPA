@@ -36,7 +36,7 @@ public class ReviewsController {
      */
     @RequestMapping(value = "/reviews/products/{productId}", method = RequestMethod.POST)
     public Review createReviewForProduct(@RequestBody Review review,
-                                                         @PathVariable("productId") Long productId) throws ProductNotFoundException {
+                                                         @PathVariable("productId") int productId) throws ProductNotFoundException {
         //Product productExisting = reviewRepository.findByProductId(productId);
         Product productExisting = productRepository.findProductById(productId);
         if (productExisting == null){
@@ -52,7 +52,7 @@ public class ReviewsController {
      * @return The list of reviews.
      */
     @RequestMapping(value = "/reviews/products/{productId}", method = RequestMethod.GET)
-    public List<Review> listReviewsForProduct(@PathVariable("productId") Long productId) {
+    public List<Review> listReviewsForProduct(@PathVariable("productId") long productId) {
         return reviewRepository.findReviewsByProductId(productId);
 
     }
